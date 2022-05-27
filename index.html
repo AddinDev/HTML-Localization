@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <a href="#id" onclick="changeLanguage('#id')" data-reload>Indonesia</a>
+    <a href="#en" onclick="changeLanguage('#en')" data-reload>English</a>
+
+    <a href="beta.html">to beta</a>
+
+    <p id="hi">
+       Halo semua!
+    </p>
+
+    <script>
+
+        if (typeof(Storage) !== "undefined") {
+            if (sessionStorage.getItem("isIndonesianLanguage")) {
+                changeLanguage("#id");
+            } else {
+                changeLanguage("#en");
+            }
+        } else {
+            sessionStorage.isIndonesianLanguage = true;
+        } 
+
+        function changeLanguage(lang) {
+            if (lang === "#id") {
+                sessionStorage.setItem("isIndonesianLanguage", true)
+            } else {
+                sessionStorage.setItem("isIndonesianLanguage", false)
+            }
+            location.hash = lang;
+            location.reload();
+        }
+
+        var dataReload = document.querySelectorAll("[data-reload]");
+
+        // var language = {
+        //     id: {
+        //         welcome: "Halo semua!"
+        //     },
+        //     en: {
+        //         welcome: "Hello everyone!"
+        //     }
+        // }  
+
+        if (window.location.hash) {
+            if (window.location.hash === "#en") {
+                hi.textContent = language.en.welcome;
+            }
+        }
+    </script>
+</body>
+</html>
